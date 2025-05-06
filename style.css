@@ -6,18 +6,19 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Base Styles */
 body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
+
+/* Logo Styles */
 .logo-image {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    /* Bulatkan */
     overflow: hidden;
-    /* Potong gambar di luar lingkaran */
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
@@ -25,7 +26,6 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Biar gambar pas & tidak gepeng */
 }
 
 /* Navbar Styles */
@@ -141,16 +141,6 @@ main {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-@media (max-width: 768px) {
-    .hero-content h1 {
-        font-size: 2rem;
-    }
-
-    .hero-content p {
-        font-size: 1rem;
-    }
-}
-
 /* Main Content Styles */
 .main-content {
     flex: 1;
@@ -200,7 +190,6 @@ main {
 
 .contact-column {
     flex: 1;
-    min-width: 300px;
 }
 
 .contact-box {
@@ -208,8 +197,8 @@ main {
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     padding: 2rem;
+    margin-left: 0%;
     height: 100%;
-    
 }
 
 .contact-box h3 {
@@ -231,6 +220,10 @@ main {
     height: 2px;
     background-color: #3498db;
 }
+/* Contact untuk Email ke sini */
+
+
+
 
 /* Form Styles */
 .contact-form .form-group {
@@ -269,7 +262,7 @@ main {
     background-color: #3498db;
 }
 
-/* New Email Link Button Styles */
+/* Email Link Button Styles */
 .email-link-container {
     display: flex;
     justify-content: center;
@@ -277,7 +270,9 @@ main {
 }
 
 .email-link-btn {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #2c3e50;
     color: white;
     text-decoration: none;
@@ -286,23 +281,16 @@ main {
     font-size: 1.1rem;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    min-width: 250px;
-    /* Hapus margin kiri */
     margin: 0 auto;
     width: 100%;
-    display: flex;
-        justify-content: center;
-        /* Mengatur secara horizontal */
-        align-items: center;
-        /* Mengatur secara vertikal */
-        /* Tentukan tinggi div sesuai kebutuhan */
-        text-align: center;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .email-link-btn:hover {
     background-color: #3498db;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .email-link-btn:active {
@@ -378,43 +366,20 @@ main {
 .phone-icon {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%233498db' viewBox='0 0 16 16'%3E%3Cpath d='M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z'/%3E%3Cpath d='M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z'/%3E%3C/svg%3E");
 }
+
 .map-container {
-            width: 100%;
-            height: 150px;
-            border-radius: 8px;
-            overflow: hidden;
-            margin: 1.5rem 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            
-            
-        }
-        
-        .map-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+    width: 100%;
+    height: 150px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 1.5rem 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
-/* Responsive */
-@media (max-width: 768px) {
-    .contact-columns {
-        flex-direction: column;
-    }
-
-    .contact-header h2 {
-        font-size: 2rem;
-    }
-
-    .contact-column {
-        width: 100%;
-    }
-
-    .contact-box {
-        margin-bottom: 2rem;
-    }
-         .map-container {
-             height: 250px;
-         }
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
 }
 
 /* Footer Styles */
@@ -473,26 +438,24 @@ main {
 }
 
 .social-links a {
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 40px;
     height: 40px;
     background-color: #34495e;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     transition: all 0.3s ease;
 }
 
 .social-links a:hover {
     background-color: #3498db;
+    transform: translateY(-2px);
 }
-/* ---------------------------------------menu bar -------------*/
-/* Enhanced Menu Bar Styles */
-/* Enhanced Menu Bar Styles */
+
+/* Menu Content Styles */
 .menucontent-container {
     padding: 50px 30px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -522,12 +485,10 @@ main {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    /* Firefox */
 }
 
 .menucontent-tabs::-webkit-scrollbar {
     display: none;
-    /* Chrome, Safari, Edge */
 }
 
 .menucontent-tab {
@@ -566,6 +527,8 @@ main {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 25px;
     margin-top: 20px;
+    opacity: 1;
+    transition: opacity 0.3s ease;
 }
 
 .menucontent-card {
@@ -642,44 +605,32 @@ main {
     transform: translateX(3px);
 }
 
-/* Tab Content Enhancements */
-.menucontent-items {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 25px;
-    margin-top: 20px;
-    opacity: 1;
-    transition: opacity 0.3s ease;
-}
-
-/* Warning Tab Special Styling */
+/* Tab Content Styling */
 #waspada-content .menucontent-card h3 {
-    color: #c0392b; /* Red color for warning titles */
+    color: #c0392b;
 }
 
 #waspada-content .menucontent-card {
     border-left: 3px solid #c0392b;
 }
 
-/* Info Lelang Special Styling */
 #info-lelang-content .menucontent-card h3 {
-    color: #2980b9; /* Blue color for auction titles */
+    color: #2980b9;
 }
 
 #info-lelang-content .menucontent-card {
     border-left: 3px solid #2980b9;
 }
 
-/* Pengumuman Special Styling */
 #pengumuman-content .menucontent-card h3 {
-    color: #27ae60; /* Green color for announcement titles */
+    color: #27ae60;
 }
 
 #pengumuman-content .menucontent-card {
     border-left: 3px solid #27ae60;
 }
 
-/* Badge styles for different categories */
+/* Badge styles */
 .content-badge {
     display: inline-block;
     padding: 4px 10px;
@@ -704,109 +655,7 @@ main {
     color: #27ae60;
 }
 
-/* Animation for tab switching */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.fade-in {
-    animation: fadeIn 0.4s ease forwards;
-}
-
-/* Enhanced hover effects */
-.menucontent-card:hover .read-more svg {
-    animation: bounce 0.5s ease infinite alternate;
-}
-
-@keyframes bounce {
-    from { transform: translateX(0); }
-    to { transform: translateX(5px); }
-}
-
-/* Enhanced responsive styling */
-@media (max-width: 480px) {
-    .menucontent-tabs {
-        gap: 10px;
-    }
-    
-    .menucontent-tab {
-        font-size: 13px;
-        padding: 8px 5px;
-    }
-    
-    .menucontent-title h2 {
-        font-size: 22px;
-    }
-}
-
-/* ======================================================================================== */
-/* Tab Content Enhancements */
-.menucontent-items {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 25px;
-    margin-top: 20px;
-    opacity: 1;
-    transition: opacity 0.3s ease;
-}
-
-/* Warning Tab Special Styling */
-#waspada-content .menucontent-card h3 {
-    color: #c0392b;
-    /* Red color for warning titles */
-}
-
-#waspada-content .menucontent-card {
-    border-left: 3px solid #c0392b;
-}
-
-/* Info Lelang Special Styling */
-#info-lelang-content .menucontent-card h3 {
-    color: #2980b9;
-    /* Blue color for auction titles */
-}
-
-#info-lelang-content .menucontent-card {
-    border-left: 3px solid #2980b9;
-}
-
-/* Pengumuman Special Styling */
-#pengumuman-content .menucontent-card h3 {
-    color: #27ae60;
-    /* Green color for announcement titles */
-}
-
-#pengumuman-content .menucontent-card {
-    border-left: 3px solid #27ae60;
-}
-
-/* Badge styles for different categories */
-.content-badge {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
-.badge-warning {
-    background-color: rgba(192, 57, 43, 0.1);
-    color: #c0392b;
-}
-
-.badge-auction {
-    background-color: rgba(41, 128, 185, 0.1);
-    color: #2980b9;
-}
-
-.badge-announcement {
-    background-color: rgba(39, 174, 96, 0.1);
-    color: #27ae60;
-}
-
-/* Animation for tab switching */
+/* Animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -823,11 +672,6 @@ main {
     animation: fadeIn 0.4s ease forwards;
 }
 
-/* Enhanced hover effects */
-.menucontent-card:hover .read-more svg {
-    animation: bounce 0.5s ease infinite alternate;
-}
-
 @keyframes bounce {
     from {
         transform: translateX(0);
@@ -838,88 +682,10 @@ main {
     }
 }
 
-/* Enhanced responsive styling */
-@media (max-width: 480px) {
-    .menucontent-tabs {
-        gap: 10px;
-    }
-
-    .menucontent-tab {
-        font-size: 13px;
-        padding: 8px 5px;
-    }
-
-    .menucontent-title h2 {
-        font-size: 22px;
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@media (max-width: 576px) {
-    .menucontent-title h2 {
-        font-size: 24px;
-    }
-    
-    .menucontent-tabs {
-        gap: 15px;
-    }
-    
-    .menucontent-tab {
-        font-size: 14px;
-        padding: 8px 0;
-    }
-    
-    .menucontent-items {
-        grid-template-columns: 1fr;
-    }
-    
-    .menucontent-title h2 {
-        font-size: 24px;
-    }
-    
-    .menucontent-tabs {
-        gap: 15px;
-    }
-    
-    .menucontent-tab {
-        font-size: 14px;
-        padding: 8px 0;
-    }
-    
-    .menucontent-items {
-        grid-template-columns: 1fr;
-    }
-         
-}
-
 /* Responsive Styles */
 @media (max-width: 768px) {
     .navbar {
         padding: 1rem;
-        width: 100%;
-        overflow-x: visible;
     }
 
     .toggle-button {
@@ -960,6 +726,34 @@ main {
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .contact-columns {
+        flex-direction: column;
+    }
+
+    .contact-header h2 {
+        font-size: 2rem;
+    }
+
+    .contact-column {
+        width: 100%;
+    }
+
+    .contact-box {
+        margin-bottom: 2rem;
+    }
+
+    .map-container {
+        height: 250px;
+    }
+
     .menucontent-container {
         padding: 30px 15px;
     }
@@ -982,3 +776,127 @@ main {
         gap: 20px;
     }
 }
+
+@media (max-width: 576px) {
+    .menucontent-container {
+        padding: 30px 15px;
+    }
+
+    .menucontent-title h2 {
+        font-size: 24px;
+    }
+
+    .menucontent-tabs {
+        gap: 15px;
+    }
+
+    .menucontent-tab {
+        font-size: 14px;
+        padding: 8px 0;
+    }
+
+    .menucontent-items {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+
+    
+            /* Navbar */
+            .navbar {
+                padding: 0.5rem 1rem;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+    
+            .toggle-button {
+                margin-left: auto;
+            }
+    
+            .menu {
+                top: 60px;
+                /* pastikan menu turun ke bawah navbar */
+            }
+    
+            .menu li a {
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+    
+            /* Hero Section */
+            .hero-content {
+                padding: 2rem 1rem;
+                text-align: center;
+            }
+    
+            .hero-content h1 {
+                font-size: 1.8rem;
+                line-height: 1.3;
+            }
+    
+            .hero-content p {
+                font-size: 0.95rem;
+            }
+    
+            /* Konten utama */
+            .menucontent-container {
+                padding: 20px 10px;
+            }
+    
+            .menucontent-title h2 {
+                font-size: 20px;
+            }
+    
+            .menucontent-tabs {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+            }
+    
+            .menucontent-tab {
+                font-size: 12px;
+                padding: 6px 8px;
+            }
+    
+            .menucontent-items {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+    
+            /* Kontak dan footer */
+            .contact-columns {
+                flex-direction: column;
+            }
+    
+            .contact-header h2 {
+                font-size: 1.8rem;
+                text-align: center;
+            }
+    
+            .contact-box {
+                padding: 1rem;
+                margin-bottom: 1.5rem;
+            }
+    
+            .map-container {
+                height: 200px;
+            }
+    
+            .footer {
+                text-align: center;
+                padding: 1rem;
+            }
+    
+            .footer-container,
+            .footer-bottom {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+    
+            .footer-container p,
+            .footer-bottom {
+                font-size: 0.85rem;
+            }
+        }
