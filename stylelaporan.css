@@ -307,7 +307,255 @@ body {
 .social-links a:hover {
     background-color: #3498db;
 }
+/* Tambahan CSS untuk PDF viewer */
+.pdf-container {
+    width: 100%;
+    margin: 25px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    position: relative;
+    background-color: #f8f9fa;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(52, 152, 219, 0.2);
+}
 
+.pdf-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.pdf-container.loading::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(248, 249, 250, 0.9);
+    z-index: 5;
+    animation: pulse 1.5s infinite;
+}
+
+.pdf-container.loading::after {
+    content: "Memuat PDF...";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2rem;
+    color: #3498db;
+    font-weight: 600;
+    z-index: 6;
+}
+
+.pdf-viewer {
+    width: 100%;
+    height: 650px;
+    border: none;
+    background-color: #fff;
+    transition: all 0.3s ease;
+    order: none;
+}
+.pdf-header {
+    background: linear-gradient(135deg, #3498db, #1a5276);
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 12px 12px 0 0;
+    position: relative;
+    overflow: hidden;
+}
+.pdf-header::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+    animation: float 8s infinite ease-in-out;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.pdf-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.pdf-title i {
+    margin-right: 10px;
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Kontrol PDF yang interaktif */
+.pdf-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.pdf-control-btn {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.pdf-control-btn::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.5s, height 0.5s;
+}
+
+.pdf-control-btn:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+    transform: scale(1.1) rotate(5deg);
+}
+
+.pdf-control-btn:hover::after {
+    width: 120%;
+    height: 120%;
+}
+
+.pdf-control-btn i {
+    position: relative;
+    z-index: 2;
+}
+
+.pdf-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.pdf-close:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+    transform: rotate(90deg);
+}
+
+/* Bagian PDF dengan animasi */
+.pdf-section {
+    display: none;
+    margin: 40px 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.pdf-section.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    animation: fadeIn 0.5s ease;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.pdf-tabs {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.pdf-tab {
+    padding: 10px 20px;
+    background-color: #e1e1e1;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-radius: 4px 4px 0 0;
+    margin-right: 5px;
+}
+
+.pdf-tab.active {
+    background-color: #3498db;
+    color: white;
+}
+
+.pdf-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.toggle-view-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+.toggle-view-btn i {
+    margin-right: 5px;
+}
+
+.toggle-view-btn:hover {
+    background-color: #004a87;
+}
+
+.report-expanded {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+}
+
+.pdf-section {
+    display: none;
+}
+
+.pdf-section.active {
+    display: block;
+}
 /* Responsive Styles */
 @media (max-width: 768px) {
     .toggle-button {
@@ -357,4 +605,9 @@ body {
     .year-reports {
         grid-template-columns: 1fr;
     }
+        
+    .pdf-viewer {
+                height: 400px;
+    }
+        
 }
