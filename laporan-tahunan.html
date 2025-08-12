@@ -7,247 +7,7 @@
     <title>Laporan Tahunan - PT BPR Pembangunan Nagari</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="stylelaporan.css">
-    <style>
-        /* Tambahan CSS untuk PDF viewer yang Lebih Menarik dan Interaktif */
-        /* Efek loading untuk PDF container */
-        @keyframes pulse {
-            0% {
-                opacity: 0.6;
-            }
-
-            50% {
-                opacity: 0.8;
-            }
-
-            100% {
-                opacity: 0.6;
-            }
-        }
-
-        .pdf-container.loading::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #f0f0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 5;
-            animation: pulse 1.5s infinite;
-        }
-
-        .pdf-container.loading::after {
-            content: "Memuat PDF...";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 1.2rem;
-            color: #3498db;
-            font-weight: 600;
-            z-index: 6;
-        }
-
-        .pdf-container {
-            width: 100%;
-            margin: 25px 0;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            position: relative;
-            background-color: #f8f9fa;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .pdf-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        }
-
-        .pdf-viewer {
-            width: 100%;
-            height: 650px;
-            border: none;
-            background-color: #fff;
-        }
-
-        .pdf-header {
-            background: linear-gradient(135deg, #3498db, #1a5276);
-            color: white;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-radius: 12px 12px 0 0;
-        }
-
-        .pdf-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin: 0;
-            display: flex;
-            align-items: center;
-        }
-
-        .pdf-title i {
-            margin-right: 10px;
-            font-size: 1.5rem;
-        }
-
-        .pdf-controls {
-            display: flex;
-            gap: 10px;
-        }
-
-        .pdf-control-btn {
-            background-color: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: none;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .pdf-control-btn:hover {
-            background-color: rgba(255, 255, 255, 0.4);
-            transform: scale(1.1);
-        }
-
-        .pdf-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 15px;
-            gap: 10px;
-        }
-
-        .toggle-view-btn {
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
-        }
-
-        .toggle-view-btn i {
-            margin-right: 8px;
-            transition: transform 0.3s ease;
-        }
-
-        .toggle-view-btn:hover {
-            background: linear-gradient(135deg, #2980b9, #1a5276);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(52, 152, 219, 0.4);
-        }
-
-        .toggle-view-btn:hover i {
-            transform: scale(1.2);
-        }
-
-        .download-btn {
-            background: linear-gradient(135deg, #f7941d, #e67e22);
-            box-shadow: 0 4px 10px rgba(247, 148, 29, 0.3);
-            border-radius: 50px;
-            transition: all 0.3s ease;
-        }
-
-        .download-btn:hover {
-            background: linear-gradient(135deg, #e67e22, #d35400);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(247, 148, 29, 0.4);
-        }
-
-        .pdf-section {
-            display: none;
-            margin: 40px 0;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        .pdf-section.active {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .pdf-toolbar {
-            background-color: #f1f1f1;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .pdf-info {
-            color: #555;
-            font-size: 0.9rem;
-        }
-
-        .pdf-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background-color: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: none;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 10;
-        }
-
-        .pdf-close:hover {
-            background-color: rgba(255, 255, 255, 0.4);
-            transform: rotate(90deg);
-        }
-
-        .report-card {
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
-        }
-
-        .report-card.highlight {
-            border: 1px solid #3498db;
-            transform: scale(1.02);
-        }
-
-        @media (max-width: 768px) {
-            .pdf-viewer {
-                height: 450px;
-            }
-
-            .pdf-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-
-            .pdf-controls {
-                align-self: flex-end;
-            }
-        }
-    </style>
+    <script src="laporantahunan.js"></script>
 </head>
 
 <body>
@@ -278,7 +38,6 @@
 
     <!-- Hero Section -->
     <div class="hero-section">
-        <img class="hero-bg-image" src="./gambar/image.png" alt="Background Image">
         <div class="hero-content">
             <h1>Laporan Tahunan</h1>
             <p>Transparansi dan akuntabilitas adalah komitmen kami. Dapatkan informasi lengkap mengenai kinerja dan
@@ -291,20 +50,28 @@
         <div class="content-container">
             <h2 class="section-title">Laporan Tahunan</h2>
 
+            <!-- Mobile Notice -->
+            <div class="mobile-notice" id="mobileNotice">
+                <i class="fas fa-mobile-alt"></i>
+                <strong>Mode Mobile Terdeteksi:</strong> PDF akan dibuka menggunakan Google Docs Viewer untuk pengalaman
+                terbaik di perangkat mobile.
+            </div>
+
             <div class="year-reports">
                 <!-- 2024 Report Berkelanjutan -->
                 <div class="report-card" id="report-2024-berkelanjutan">
                     <div class="report-image">
-                        <i class="fas fa-file-pdf"></i>
+                        <i class="fas fa-leaf"></i>
                     </div>
                     <div class="report-content">
                         <h3>Laporan Tahunan berkelanjutan 2024</h3>
                         <p>Di tahun 2024, PT. BPR Pembangunan Nagari melaksanakan Aksi Keuangan Berkelanjutan (RAKB)
                             Tahun 2024 sesuai POJK No. 51/ POJK.03/2017 tentang Penerapan Keuangan Berkelanjutan bagi
-                            Lembaga Jasa Keuangan, Emiten, dan Perusahaan Publik. PT. PT BPR Pembangunan Nagari
-                            menerapkan prinsip keberlanjutan.</p>
+                            Lembaga Jasa Keuangan, Emiten, dan Perusahaan Publik. PT. BPR Pembangunan Nagari
+                            menerapkan prinsip keberlanjutan dalam seluruh aspek operasionalnya.</p>
                         <div class="pdf-actions">
-                            <a href="./gambar/laporan berkelanjutan 2024.pdf" class="download-btn" download>
+                            <a href="https://drive.google.com/uc?export=download&id=1Km80rTKXNdyGE6LyexlWnydFBfz7YCvv"
+                                class="download-btn" download>
                                 <i class="fas fa-download"></i> Unduh PDF
                             </a>
                             <button class="toggle-view-btn" onclick="togglePdfView('berkelanjutan')">
@@ -317,15 +84,15 @@
                 <!-- 2024 Report Tahunan -->
                 <div class="report-card" id="report-2024-tahunan">
                     <div class="report-image">
-                        <i class="fas fa-file-pdf"></i>
+                        <i class="fas fa-chart-line"></i>
                     </div>
                     <div class="report-content">
                         <h3>Laporan Tahunan PT BPR Pembangunan Nagari Tahun 2024</h3>
                         <p>Laporan Tahunan 2024 ini merupakan laporan lengkap yang memuat kinerja PT BPR
-                            Pembangunan nagari dalam kurun waktu 1 (satu) tahun terhitung mulai 1 Januari 2024 sampai
+                            Pembangunan Nagari dalam kurun waktu 1 (satu) tahun terhitung mulai 1 Januari 2024 sampai
                             dengan 31 Desember 2024 yang berisi Laporan Keuangan Tahunan dan Informasi Umum Bank.</p>
                         <div class="pdf-actions">
-                            <a href="./gambar/Laporan Tahunan PT BPR Pembangunan Nagari Tahun 2024.pdf"
+                            <a href="https://drive.google.com/uc?export=download&id=168hwSKgYNmFO1OGvFa2KHzaIeJx5OyET"
                                 class="download-btn" download>
                                 <i class="fas fa-download"></i> Unduh PDF
                             </a>
@@ -340,81 +107,64 @@
             <!-- PDF Viewer Berkelanjutan -->
             <div class="pdf-section" id="pdf-section-berkelanjutan">
                 <div class="pdf-container">
-                    <!-- Header untuk PDF viewer -->
                     <div class="pdf-header">
                         <h3 class="pdf-title">
                             <i class="fas fa-file-pdf"></i>
                             Laporan Tahunan Berkelanjutan 2024
                         </h3>
                         <div class="pdf-controls">
-                            <a href="./gambar/laporan berkelanjutan 2024.pdf" class="pdf-control-btn" download
-                                title="Unduh PDF">
+                            <a href="https://drive.google.com/uc?export=download&id=1Km80rTKXNdyGE6LyexlWnydFBfz7YCvv"
+                                class="pdf-control-btn" download title="Unduh PDF">
                                 <i class="fas fa-download"></i>
                             </a>
                             <button class="pdf-control-btn" onclick="openFullscreen('pdf-berkelanjutan')"
                                 title="Tampilan Layar Penuh">
                                 <i class="fas fa-expand"></i>
                             </button>
+                            <button class="pdf-close" onclick="hidePdfView('berkelanjutan')" title="Tutup PDF">
+                                <i class="fas fa-times"></i>
+                            </button>
                         </div>
-                        <button class="pdf-close" onclick="hidePdfView('berkelanjutan')" title="Tutup PDF">
-                            <i class="fas fa-times"></i>
-                        </button>
                     </div>
 
-                    <!-- PDF Viewer Object -->
-                    <object id="pdf-berkelanjutan" data="./gambar/laporan berkelanjutan 2024.pdf" type="application/pdf"
-                        class="pdf-viewer">
-                        <div class="pdf-fallback">
-                            <p>Browser Anda tidak mendukung tampilan PDF secara langsung.</p>
-                            <a href="./gambar/laporan berkelanjutan 2024.pdf" class="download-btn">
-                                <i class="fas fa-download"></i> Unduh PDF
-                            </a>
-                        </div>
-                    </object>
+                    <iframe id="pdf-berkelanjutan"
+                        src="https://drive.google.com/file/d/1Km80rTKXNdyGE6LyexlWnydFBfz7YCvv/preview"
+                        class="pdf-viewer" allow="autoplay">
+                    </iframe>
                 </div>
             </div>
 
             <!-- PDF Viewer Tahunan -->
             <div class="pdf-section" id="pdf-section-tahunan">
                 <div class="pdf-container">
-                    <!-- Header untuk PDF viewer -->
                     <div class="pdf-header">
                         <h3 class="pdf-title">
                             <i class="fas fa-file-pdf"></i>
                             Laporan Tahunan PT BPR Pembangunan Nagari 2024
                         </h3>
                         <div class="pdf-controls">
-                            <a href="./gambar/Laporan Tahunan PT BPR Pembangunan Nagari Tahun 2024.pdf"
+                            <a href="https://drive.google.com/uc?export=download&id=168hwSKgYNmFO1OGvFa2KHzaIeJx5OyET"
                                 class="pdf-control-btn" download title="Unduh PDF">
                                 <i class="fas fa-download"></i>
                             </a>
                             <button class="pdf-control-btn" onclick="openFullscreen('pdf-tahunan')"
-                                title="Tampilan Layar Penuh">
+                                title="Tampilan Layar Penul">
                                 <i class="fas fa-expand"></i>
                             </button>
+                            <button class="pdf-close" onclick="hidePdfView('tahunan')" title="Tutup PDF">
+                                <i class="fas fa-times"></i>
+                            </button>
                         </div>
-                        <button class="pdf-close" onclick="hidePdfView('tahunan')" title="Tutup PDF">
-                            <i class="fas fa-times"></i>
-                        </button>
                     </div>
 
-                    <!-- PDF Viewer Object -->
-                    <object id="pdf-tahunan" data="./gambar/Laporan Tahunan PT BPR Pembangunan Nagari Tahun 2024.pdf"
-                        type="application/pdf" class="pdf-viewer">
-                        <div class="pdf-fallback">
-                            <p>Browser Anda tidak mendukung tampilan PDF secara langsung.</p>
-                            <a href="./gambar/Laporan Tahunan PT BPR Pembangunan Nagari Tahun 2024.pdf"
-                                class="download-btn">
-                                <i class="fas fa-download"></i> Unduh PDF
-                            </a>
-                        </div>
-                    </object>
+                    <iframe id="pdf-tahunan"
+                        src="https://drive.google.com/file/d/168hwSKgYNmFO1OGvFa2KHzaIeJx5OyET/preview"
+                        class="pdf-viewer" allow="autoplay">
+                    </iframe>
                 </div>
             </div>
 
-            <div style="margin-top: 50px; margin-bottom: 100px;">
-                <!-- Placeholder untuk menjaga jarak, bisa ditambahkan konten di masa depan -->
-            </div>
+            <div style="margin-top: 50px; margin-bottom: 100px;"></div>
         </div>
     </main>
 
@@ -448,7 +198,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 PT BRP Pembangunan Nagari. Hak Cipta Dilindungi.</p>
+            <p>&copy; 2025 PT BPR Pembangunan Nagari. Hak Cipta Dilindungi.</p>
             <div class="social-links">
                 <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i
                         class="fab fa-facebook-f"></i></a>
@@ -459,117 +209,3 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        // Script untuk toggle menu mobile
-        const toggleButton = document.querySelector('.toggle-button');
-        const menu = document.querySelector('.menu');
-
-        if (toggleButton) {
-            toggleButton.addEventListener('click', () => {
-                menu.classList.toggle('active');
-            });
-        }
-
-        // Script untuk PDF viewer
-        function togglePdfView(reportType) {
-            const pdfSection = document.getElementById(`pdf-section-${reportType}`);
-            const reportCard = document.getElementById(`report-2024-${reportType}`);
-
-            // Sembunyikan semua bagian PDF terlebih dahulu
-            document.querySelectorAll('.pdf-section').forEach(section => {
-                section.classList.remove('active');
-            });
-
-            // Hapus highlight dari semua kartu laporan
-            document.querySelectorAll('.report-card').forEach(card => {
-                card.classList.remove('highlight');
-            });
-
-            // Tambahkan highlight ke kartu laporan yang dipilih
-            reportCard.classList.add('highlight');
-
-            // Tampilkan bagian PDF yang dipilih dengan animasi
-            setTimeout(() => {
-                pdfSection.classList.add('active');
-            }, 100);
-
-            // Scroll ke bagian PDF dengan efek smooth
-            setTimeout(() => {
-                pdfSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }, 150);
-
-            // Efek loading
-            showLoadingEffect(reportType);
-        }
-
-        function hidePdfView(reportType) {
-            const pdfSection = document.getElementById(`pdf-section-${reportType}`);
-            const reportCard = document.getElementById(`report-2024-${reportType}`);
-
-            // Sembunyikan bagian PDF
-            pdfSection.classList.remove('active');
-
-            // Hapus highlight dari kartu laporan
-            setTimeout(() => {
-                reportCard.classList.remove('highlight');
-            }, 300);
-
-            // Scroll kembali ke laporan dengan efek smooth
-            reportCard.scrollIntoView({
-                behavior: 'smooth',
-                block: 'center'
-            });
-        }
-
-        // Fungsi untuk tampilan fullscreen PDF
-        function openFullscreen(elementId) {
-            const element = document.getElementById(elementId);
-
-            if (element.requestFullscreen) {
-                element.requestFullscreen();
-            } else if (element.webkitRequestFullscreen) { /* Safari */
-                element.webkitRequestFullscreen();
-            } else if (element.msRequestFullscreen) { /* IE11 */
-                element.msRequestFullscreen();
-            }
-        }
-
-        // Efek loading sebelum menampilkan PDF
-        function showLoadingEffect(reportType) {
-            const pdfContainer = document.querySelector(`#pdf-section-${reportType} .pdf-container`);
-
-            // Tambahkan class loading
-            pdfContainer.classList.add('loading');
-
-            // Hapus class loading setelah PDF dimuat
-            setTimeout(() => {
-                pdfContainer.classList.remove('loading');
-            }, 1500);
-        }
-
-        // Tambahkan event listener untuk animasi hover pada kartu laporan
-        document.addEventListener('DOMContentLoaded', () => {
-            const reportCards = document.querySelectorAll('.report-card');
-
-            reportCards.forEach(card => {
-                card.addEventListener('mouseenter', () => {
-                    card.style.transform = 'translateY(-5px)';
-                    card.style.boxShadow = '0 12px 16px rgba(0, 0, 0, 0.15)';
-                });
-
-                card.addEventListener('mouseleave', () => {
-                    if (!card.classList.contains('highlight')) {
-                        card.style.transform = 'translateY(0)';
-                        card.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
-                    }
-                });
-            });
-        });
-    </script>
-</body>
-
-</html>
